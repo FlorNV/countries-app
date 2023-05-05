@@ -9,6 +9,14 @@ export const Navbar = () => {
   }
 
   useEffect(() => {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      setTheme('dark')
+    } else {
+      setTheme('light')
+    }
+  }, [])
+
+  useEffect(() => {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark')
     } else {
@@ -17,7 +25,7 @@ export const Navbar = () => {
   }, [theme])
 
   return (
-    <header className='h-16 bg-white dark:bg-slate-800 dark:text-white shadow-md px-6'>
+    <header className='h-20 bg-white dark:bg-dark-blue dark:text-white shadow-md px-6 transition-colors duration-500'>
       <nav className='container mx-auto h-full flex items-center justify-between'>
         <h1 className='text-2xl font-extrabold'>
           Where in th world?

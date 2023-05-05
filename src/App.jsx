@@ -1,9 +1,10 @@
-import { Navbar } from './components/Navbar'
+import { Navbar, CountryList } from './components/index'
 
 function App () {
   return (
     <>
       <Navbar />
+      <CountryList />
     </>
   )
 }
