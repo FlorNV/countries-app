@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { IoMoonOutline, IoMoon } from 'react-icons/io5'
+import { Outlet } from 'react-router-dom'
 
 export const Navbar = () => {
   const [theme, setTheme] = useState('light')
@@ -25,24 +26,27 @@ export const Navbar = () => {
   }, [theme])
 
   return (
-    <header className='h-20 bg-white dark:bg-dark-blue dark:text-white shadow-md px-6 transition-colors duration-500'>
-      <nav className='container mx-auto h-full flex items-center justify-between'>
-        <h1 className='text-2xl font-extrabold'>
-          Where in th world?
-        </h1>
-        <div>
-          <button
-            type='button'
-            className='flex items-center gap-2 font-semibold'
-            onClick={handleThemeSwitch}
-          >
-            {theme === 'dark'
-              ? <IoMoon className='text-lg' />
-              : <IoMoonOutline className='text-lg' />}
-            <span>Dark Mode</span>
-          </button>
-        </div>
-      </nav>
-    </header>
+    <>
+      <header className='h-20 bg-white dark:bg-dark-blue dark:text-white shadow-md px-6 transition-colors duration-500'>
+        <nav className='container mx-auto h-full flex items-center justify-between'>
+          <h1 className='text-2xl font-extrabold'>
+            Where in th world?
+          </h1>
+          <div>
+            <button
+              type='button'
+              className='flex items-center gap-2 font-semibold'
+              onClick={handleThemeSwitch}
+            >
+              {theme === 'dark'
+                ? <IoMoon className='text-lg' />
+                : <IoMoonOutline className='text-lg' />}
+              <span>Dark Mode</span>
+            </button>
+          </div>
+        </nav>
+      </header>
+      <Outlet />
+    </>
   )
 }

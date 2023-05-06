@@ -18,12 +18,12 @@ export const CountryList = () => {
   }, [])
 
   return (
-    <div className='py-10 px-16 lg:px-12 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center dark:bg-very-dark-blue-bg transition-colors duration-500'>
+    <main className='py-10 px-16 lg:px-12 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 justify-items-center dark:bg-very-dark-blue-bg transition-colors duration-500'>
       {countries.map(country =>
         <CountryCard
           key={country.alpha3Code}
           country={country}
         />)}
-    </div>
+    </main>
   )
 }
