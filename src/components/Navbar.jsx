@@ -6,7 +6,9 @@ export const Navbar = () => {
   const [theme, setTheme] = useState('light')
 
   const handleThemeSwitch = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark')
+    const themeUpdated = theme === 'dark' ? 'light' : 'dark'
+    setTheme(themeUpdated)
+    window.localStorage.setItem('theme', themeUpdated)
   }
 
   useEffect(() => {
@@ -14,6 +16,11 @@ export const Navbar = () => {
       setTheme('dark')
     } else {
       setTheme('light')
+    }
+
+    const storedTheme = window.localStorage.getItem('theme')
+    if (storedTheme) {
+      setTheme(storedTheme)
     }
   }, [])
 
@@ -41,7 +48,7 @@ export const Navbar = () => {
               {theme === 'dark'
                 ? <IoMoon className='text-lg' />
                 : <IoMoonOutline className='text-lg' />}
-              <span>Dark Mode</span>
+              Dark Mode
             </button>
           </div>
         </nav>

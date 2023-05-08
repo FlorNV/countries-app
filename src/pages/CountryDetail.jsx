@@ -1,18 +1,10 @@
 import { Link, useParams } from 'react-router-dom'
-import { useEffect, useState } from 'react'
 import { BsArrowLeft } from 'react-icons/bs'
-import data from '../api/data.json'
+import { useCountries } from '../hooks/index'
 
 export const CountryDetail = () => {
   const { id } = useParams()
-  const [country, setCountry] = useState(null)
-
-  useEffect(() => {
-    const countryFound = data.find(item => item.name === id)
-    if (countryFound) {
-      setCountry(countryFound)
-    }
-  }, [id])
+  const { country } = useCountries({ id })
 
   return (
     <main className='min-h-[calc(100vh-5rem)] py-10 dark:bg-very-dark-blue-bg dark:text-white transition-colors duration-500'>
@@ -25,17 +17,17 @@ export const CountryDetail = () => {
             <div className='flex-1 shadow-sm'>
               <img
                 src={country.flags.png}
-                alt={`${country.name} flag`}
+                alt={`${country.name.common} flag`}
                 className='w-full'
               />
             </div>
             <div className='flex-1'>
-              <h2 className='text-3xl font-extrabold my-6'>{country.name}</h2>
+              <h2 className='text-3xl font-extrabold my-6'>{country.name.common}</h2>
               <div className='flex justify-between mb-12 font-extralight'>
                 <div>
                   <div>
                     <span className='font-bold leading-8'>Native Name: </span>
-                    {country.nativeName}
+                    {Object.values(country.name.nativeName)[0].common}
                   </div>
                   <div>
                     <span className='font-bold leading-8'>Population: </span>
@@ -57,15 +49,15 @@ export const CountryDetail = () => {
                 <div>
                   <div>
                     <span className='font-bold leading-8'>Top Level Domain: </span>
-                    {country.topLevelDomain}
+                    {country.tld}
                   </div>
                   <div>
                     <span className='font-bold leading-8'>Currencies: </span>
-                    {country.currencies?.map(currency => currency.name).join(', ') || '-'}
+                    {Object.values(country.currencies)[0].name || '-'}
                   </div>
                   <div>
                     <span className='font-bold leading-8'>Languages: </span>
-                    {country.languages?.map(lang => lang.name).join(', ') || '-'}
+                    {Object.values(country.languages).join(', ') || '-'}
                   </div>
                 </div>
               </div>

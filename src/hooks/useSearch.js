@@ -6,10 +6,7 @@ export const useSearch = () => {
 
   const handleChange = (event) => setQuery(event.target.value)
 
-  const handleChangeOption = (continent) => {
-    console.log(continent)
-    setOption(continent)
-  }
+  const handleChangeOption = (continent) => setOption(continent)
 
   return { query, option, handleChange, handleChangeOption }
 }

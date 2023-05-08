@@ -1,20 +1,32 @@
 import { useEffect, useMemo, useState } from 'react'
-import data from '../api/data.json'
+import { getAllCountries, getCountryByFullName } from '../api/countries'
 
-export const useCountries = ({ query, option }) => {
+export const useCountries = ({ query = '', option = '', id = '' }) => {
   const [countries, setCountries] = useState([])
+  const [country, setCountry] = useState(null)
 
   useEffect(() => {
-    const dataMapped = data.map(item => ({
-      alpha3Code: item.alpha3Code,
-      name: item.name,
-      population: item.population,
-      region: item.region,
-      capital: item.capital,
-      flags: item.flags
-    }))
-    setCountries(dataMapped)
+    getAllCountries()
+      .then(response => {
+        const dataMapped = response.map(item => ({
+          name: item.name.common,
+          population: item.population,
+          region: item.region,
+          capital: item.capital,
+          flags: item.flags
+        }))
+        setCountries(dataMapped)
+      })
+      .catch(error => console.log(error))
   }, [])
+
+  useEffect(() => {
+    if (id) {
+      getCountryByFullName({ name: id })
+        .then(response => setCountry(response))
+        .catch(error => console.log(error))
+    }
+  }, [id])
 
   const countriesFiltered = useMemo(() => {
     return countries.filter(country =>
@@ -26,5 +38,5 @@ export const useCountries = ({ query, option }) => {
       country.region.toLowerCase().includes(option.toLowerCase()))
   }, [countriesFiltered, option])
 
-  return { countries: countriesFilteredByContinent }
+  return { countries: countriesFilteredByContinent, country }
 }
