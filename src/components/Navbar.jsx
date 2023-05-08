@@ -30,7 +30,7 @@ export const Navbar = () => {
       <header className='h-20 bg-white dark:bg-dark-blue dark:text-white shadow-md px-6 transition-colors duration-500'>
         <nav className='container mx-auto h-full flex items-center justify-between'>
           <h1 className='text-2xl font-extrabold'>
-            Where in th world?
+            Where in the world?
           </h1>
           <div>
             <button
@@ -46,6 +46,7 @@ export const Navbar = () => {
           </div>
         </nav>
       </header>
+
       <Outlet />
     </>
   )

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import data from '../api/data.json'
 
-export const useCountries = ({ query }) => {
+export const useCountries = ({ query, option }) => {
   const [countries, setCountries] = useState([])
 
   useEffect(() => {
@@ -21,5 +21,10 @@ export const useCountries = ({ query }) => {
       country.name.toLowerCase().includes(query.toLowerCase()))
   }, [countries, query])
 
-  return { countries: countriesFiltered }
+  const countriesFilteredByContinent = useMemo(() => {
+    return countriesFiltered.filter(country =>
+      country.region.toLowerCase().includes(option.toLowerCase()))
+  }, [countriesFiltered, option])
+
+  return { countries: countriesFilteredByContinent }
 }
