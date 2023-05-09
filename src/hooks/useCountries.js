@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
-import { getAllCountries, getCountryByFullName } from '../api/countries'
+import { getAllCountries } from '../api/countries'
 
-export const useCountries = ({ query = '', option = '', id = '' }) => {
+export const useCountries = ({ query, option }) => {
   const [countries, setCountries] = useState([])
-  const [country, setCountry] = useState(null)
 
   useEffect(() => {
     getAllCountries()
@@ -17,16 +16,10 @@ export const useCountries = ({ query = '', option = '', id = '' }) => {
         }))
         setCountries(dataMapped)
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error)
+      })
   }, [])
-
-  useEffect(() => {
-    if (id) {
-      getCountryByFullName({ name: id })
-        .then(response => setCountry(response))
-        .catch(error => console.log(error))
-    }
-  }, [id])
 
   const countriesFiltered = useMemo(() => {
     return countries.filter(country =>
@@ -38,5 +31,5 @@ export const useCountries = ({ query = '', option = '', id = '' }) => {
       country.region.toLowerCase().includes(option.toLowerCase()))
   }, [countriesFiltered, option])
 
-  return { countries: countriesFilteredByContinent, country }
+  return { countries: countriesFilteredByContinent }
 }

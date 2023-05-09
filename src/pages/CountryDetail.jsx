@@ -1,10 +1,10 @@
 import { Link, useParams } from 'react-router-dom'
 import { BsArrowLeft } from 'react-icons/bs'
-import { useCountries } from '../hooks/index'
+import { useCountry } from '../hooks/index'
 
 export const CountryDetail = () => {
   const { id } = useParams()
-  const { country } = useCountries({ id })
+  const { country } = useCountry({ id })
 
   return (
     <main className='min-h-[calc(100vh-5rem)] py-10 dark:bg-very-dark-blue-bg dark:text-white transition-colors duration-500'>

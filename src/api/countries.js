@@ -3,6 +3,7 @@ const ENDPOINT_COUNTRIES_URL = 'https://restcountries.com/v3.1'
 export const getAllCountries = async () => {
   try {
     const response = await fetch(`${ENDPOINT_COUNTRIES_URL}/all`)
+    // if (!response.ok) throw new Error('Request failed')
     const data = await response.json()
     return data
   } catch (error) {
