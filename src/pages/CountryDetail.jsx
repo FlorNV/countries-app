@@ -13,7 +13,7 @@ export const CountryDetail = () => {
           <BsArrowLeft />Back
         </Link>
         {!!country &&
-          <div className='flex gap-20'>
+          <div className='flex gap-x-20 gap-y-10 flex-col md:flex-row'>
             <div className='flex-1 shadow-sm'>
               <img
                 src={country.flags.png}
@@ -22,8 +22,8 @@ export const CountryDetail = () => {
               />
             </div>
             <div className='flex-1'>
-              <h2 className='text-3xl font-extrabold my-6'>{country.name.common}</h2>
-              <div className='flex justify-between mb-12 font-extralight'>
+              <h2 className='text-3xl font-extrabold mb-6 md:my-6'>{country.name.common}</h2>
+              <div className='flex flex-col md:flex-row gap-10 md:gap-0 justify-between mb-12 font-extralight'>
                 <div>
                   <div>
                     <span className='font-bold leading-8'>Native Name: </span>
@@ -61,8 +61,8 @@ export const CountryDetail = () => {
                   </div>
                 </div>
               </div>
-              <div className='flex gap-4'>
-                <span className='font-bold'>Borders: </span>
+              <div className='flex flex-col md:flex-row gap-4'>
+                <span className='font-bold'>Border Countries: </span>
                 <ul className='flex flex-wrap gap-2'>
                   {country.borders?.map(border =>
                     <li key={border} className='px-8 rounded-sm shadow-3xl border-2 dark:shadow-4xl dark:border-transparent'>
