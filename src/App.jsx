@@ -4,7 +4,7 @@ import { Home, CountryDetail } from './pages/index'
 
 function App () {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.DEV ? '/' : 'countries-app'}>
       <Routes>
         <Route path='/' element={<Navbar />}>
           <Route index element={<Home />} />
